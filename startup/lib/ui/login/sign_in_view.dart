@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:startup/globals.dart' as globals;
 
 class SignInView extends StatefulWidget {
   SignInView({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _SignInViewState extends State<SignInView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        padding: EdgeInsets.fromLTRB(10, 30, 10, 0),
+        padding: EdgeInsets.fromLTRB(40, 30, 40, 0),
         children: [
           Container(
             constraints: BoxConstraints.expand(height: 200),
@@ -29,7 +30,7 @@ class _SignInViewState extends State<SignInView> {
           ),
           Container(
             constraints: BoxConstraints.expand(height: 50),
-            child: TextField(
+            child: TextFormField(
               controller: usernameController,
               onChanged: (text) {
                 setState(() {});
@@ -37,8 +38,12 @@ class _SignInViewState extends State<SignInView> {
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                   labelText: 'Email',
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(),
+                  //fillColor: Colors.white,
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: globals.primary)),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: globals.primary),
+                  ),
                   prefixIcon: Icon(Icons.email),
                   suffixIcon: IconButton(
                       icon: Icon(Icons.clear),
