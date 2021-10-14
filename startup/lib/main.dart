@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:startup/ui/login/sign_in_view.dart';
+import 'package:startup/ui/login/splash_screen.dart';
+import 'package:startup/globals.dart' as globals;
 
 void main() {
   runApp(MyApp());
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.orange,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -42,10 +44,13 @@ class _MyHomePageState extends State<MyHomePage> {
     return MaterialApp(
       title: 'U JOYN',
       theme: ThemeData(
-        primarySwatch: Colors.cyan,
+        primarySwatch: Colors.orange,
       ),
-      initialRoute: '/login',
-      routes: {'/login': (context) => SignInView()},
+      initialRoute: '/splash',
+      routes: {
+        '/login': (context) => SignInView(),
+        '/splash': (context) => SplashScreen()
+      },
     );
   }
 }

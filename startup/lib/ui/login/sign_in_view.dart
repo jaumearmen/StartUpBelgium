@@ -20,40 +20,51 @@ class _SignInViewState extends State<SignInView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        padding: EdgeInsets.fromLTRB(40, 30, 40, 0),
+        padding: EdgeInsets.fromLTRB(40, 120, 40, 0),
         children: [
           Container(
-            constraints: BoxConstraints.expand(height: 200),
+            constraints: BoxConstraints.expand(height: 160),
             child: Image.asset(
-              'assets/images/logo.png',
+              'assets/images/logo_app.png',
             ),
           ),
           Container(
-            constraints: BoxConstraints.expand(height: 50),
-            child: TextFormField(
-              controller: usernameController,
-              onChanged: (text) {
-                setState(() {});
-              },
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                  labelText: 'Email',
-                  //fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: globals.primary)),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: globals.primary),
-                  ),
-                  prefixIcon: Icon(Icons.email),
-                  suffixIcon: IconButton(
-                      icon: Icon(Icons.clear),
-                      onPressed: () {
-                        setState(() {
-                          usernameController.clear();
-                        });
-                      })),
-            ),
-          ),
+              constraints: BoxConstraints.expand(height: 50),
+              margin: EdgeInsets.only(top: 40),
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  primaryColor: Colors.redAccent,
+                ),
+                child: TextFormField(
+                  controller: usernameController,
+                  onChanged: (text) {
+                    setState(() {});
+                  },
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                      labelText: 'Email',
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey, width: 4),
+                          borderRadius: BorderRadius.circular(30)),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey, width: 2),
+                          borderRadius: BorderRadius.circular(30)),
+                      prefixIcon: Icon(Icons.email),
+                      suffixIcon: usernameController.text.isEmpty
+                          ? Container(
+                              width: 0,
+                            )
+                          : IconButton(
+                              icon: Icon(
+                                Icons.clear,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  usernameController.clear();
+                                });
+                              })),
+                ),
+              )),
           Container(
               margin: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
               constraints: BoxConstraints.expand(height: 50),
@@ -65,7 +76,12 @@ class _SignInViewState extends State<SignInView> {
                 obscureText: isPasswordHiden,
                 decoration: InputDecoration(
                     labelText: 'Password',
-                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 4),
+                        borderRadius: BorderRadius.circular(30)),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey, width: 2),
+                        borderRadius: BorderRadius.circular(30)),
                     prefixIcon: Icon(Icons.lock),
                     suffixIcon: IconButton(
                         icon: isPasswordHiden
