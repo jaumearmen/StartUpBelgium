@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:startup/globals.dart' as globals;
+import 'package:startup/ui/login/forgot_passw.dart';
+import 'package:startup/ui/login/sign_up.dart';
 
 class SignInView extends StatefulWidget {
   SignInView({Key? key}) : super(key: key);
@@ -98,28 +100,26 @@ class _SignInViewState extends State<SignInView> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                 TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Forgot Password?',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  /*onPressed: () {
+                    child: Text(
+                      'Forgot Password?',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Reset()),
+                        MaterialPageRoute(builder: (context) => ForgotPassw()),
                       );
-                    }*/
-                ),
+                    }),
                 TextButton(
                     child: Text(
                       'Sign Up',
                       style: TextStyle(color: Colors.black),
                     ),
                     onPressed: () {
-                      /*Navigator.push(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => SignUp()),
-                      );*/
+                      );
                     })
               ])),
           Row(
@@ -129,7 +129,7 @@ class _SignInViewState extends State<SignInView> {
                 margin: EdgeInsets.only(top: 30),
                 constraints: BoxConstraints(maxHeight: 50, maxWidth: 50),
                 child: Image.asset(
-                  'assets/images/google_negre2.png',
+                  'assets/images/google-64.png',
                 ),
               ),
               Container(
