@@ -121,7 +121,26 @@ class _SignInViewState extends State<SignInView> {
                         MaterialPageRoute(builder: (context) => SignUp()),
                       );*/
                     })
-              ]))
+              ])),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 30),
+                constraints: BoxConstraints(maxHeight: 50, maxWidth: 50),
+                child: Image.asset(
+                  'assets/images/google_negre2.png',
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 30),
+                constraints: BoxConstraints(maxHeight: 50, maxWidth: 50),
+                child: Image.asset(
+                  'assets/images/facebook2.png',
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );

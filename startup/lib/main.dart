@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.yellow,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return MaterialApp(
       title: 'U JOYN',
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.yellow,
       ),
       initialRoute: '/splash',
       routes: {
