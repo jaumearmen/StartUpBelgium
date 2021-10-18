@@ -1,9 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:startup/ui/login/sign_in2.dart';
 import 'package:startup/ui/login/sign_in_view.dart';
 import 'package:startup/ui/login/splash_screen.dart';
 import 'package:startup/globals.dart' as globals;
+import 'package:startup/ui/widgets/testing.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -46,10 +51,12 @@ class _MyHomePageState extends State<MyHomePage> {
       theme: ThemeData(
         primarySwatch: Colors.yellow,
       ),
-      initialRoute: '/splash',
+      initialRoute: '/testing',
       routes: {
         '/login': (context) => SignInView(),
-        '/splash': (context) => SplashScreen()
+        '/login2': (context) => SignIn2(),
+        '/splash': (context) => SplashScreen(),
+        '/testing': (context) => Testing()
       },
     );
   }

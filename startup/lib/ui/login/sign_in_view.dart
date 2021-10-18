@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -17,6 +18,8 @@ class _SignInViewState extends State<SignInView> {
   final passwordController = TextEditingController();
 
   bool isPasswordHiden = true;
+
+  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +98,41 @@ class _SignInViewState extends State<SignInView> {
                           });
                         })),
               )),
+          Container(
+              height: 40,
+              margin: EdgeInsets.only(top: 20),
+              child: ElevatedButton(
+                  child: Text('Sign in',
+                      style: TextStyle(
+                        color: Colors.black,
+                      )),
+                  style: ElevatedButton.styleFrom(
+                      primary: globals.yellow1,
+                      onPrimary: Colors.black,
+                      shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(10.0))),
+                  onPressed: () {
+                    /*setState(() {
+                        if (errorUserName() != null)
+                          errorsUserName = true;
+                        else
+                          errorsUserName = false;
+                        /*if (errorPass() != null)
+                          errorsPass = true;
+                        else
+                          errorsPass = false;*/
+                        error = errorsUserName | errorsPass;
+                      });
+                      if (!error) {
+                        postlogin(usernameController.text,passwordController.text).then((value) {
+                          //falta comprovar contraseña
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MainView()),
+                          );
+                        });
+                      }*/
+                  })),
           Container(
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
