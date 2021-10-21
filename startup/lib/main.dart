@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
       theme: ThemeData(
         primarySwatch: Colors.yellow,
       ),
-      initialRoute: '/testing',
+      initialRoute: '/login2',
       routes: {
         '/login': (context) => SignInView(),
         '/login2': (context) => SignIn2(),

@@ -167,14 +167,14 @@ class _SignInViewState extends State<SignInView> {
                 margin: EdgeInsets.only(top: 30),
                 constraints: BoxConstraints(maxHeight: 50, maxWidth: 50),
                 child: Image.asset(
-                  'assets/images/google-64.png',
+                  'assets/images/google2.png',
                 ),
               ),
               Container(
                 margin: EdgeInsets.only(top: 30),
                 constraints: BoxConstraints(maxHeight: 50, maxWidth: 50),
                 child: Image.asset(
-                  'assets/images/facebook2.png',
+                  'assets/images/face1.png',
                 ),
               ),
             ],
