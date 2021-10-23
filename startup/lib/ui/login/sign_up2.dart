@@ -4,21 +4,90 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:startup/globals.dart' as globals;
+import 'package:startup/ui/login/sign_in2.dart';
 import 'package:startup/ui/login/sign_up.dart';
-import 'package:startup/ui/login/sign_up2.dart';
 
-class SignIn2 extends StatefulWidget {
-  SignIn2({Key? key}) : super(key: key);
+class SignUp2 extends StatefulWidget {
+  SignUp2({Key? key}) : super(key: key);
 
   @override
-  _SignIn2State createState() => _SignIn2State();
+  _SignUp2State createState() => _SignUp2State();
 }
 
-class _SignIn2State extends State<SignIn2> {
-  final usernameController = TextEditingController();
+class _SignUp2State extends State<SignUp2> {
+  final firstnameController = TextEditingController();
+  final secondnameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final repeatpasswordController = TextEditingController();
 
   bool isPasswordHiden = true;
+  bool isRepeatPasswordHiden = true;
+
+  bool errorsName = false;
+  bool errorsSecondName = false;
+  bool errorsEmail = false;
+  bool errorsPassword = false;
+  bool errorsRepeatPassword = false;
+  bool errorsAll = false;
+
+  String errorFirstName() {
+    if (firstnameController.text.isEmpty) return "Empty Field";
+    return "";
+  }
+
+  String errorSecondName() {
+    if (secondnameController.text.isEmpty) return "Empty Field";
+    return "";
+  }
+
+  String errorEmail() {
+    if (emailController.text.isEmpty)
+      return "Empty Field";
+    else if (!RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(emailController.text)) {
+      return "The email has not a vaild format";
+    }
+    return "";
+  }
+
+  String errorPass() {
+    if (passwordController.text.isEmpty)
+      return "Empty Field";
+    else if (passwordController.text.length < 6)
+      return "Password is too short";
+    else if (passwordController.text.length > 20)
+      return "Password is too long";
+    else if (!RegExp(
+            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~?.,_-]).{6,}$')
+        .hasMatch(passwordController.text)) {
+      return "The password must contain at least \none majuscule, one minuscule, a number and a symbol";
+    }
+    return "";
+  }
+
+  String errorRepeatPass() {
+    if (repeatpasswordController.text.isEmpty)
+      return "Empty Field";
+    else if (repeatpasswordController.text != passwordController.text) {
+      return "The passwords does not match";
+    }
+    return "";
+  }
+
+  bool disposed = false;
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    disposed = true;
+    firstnameController.dispose();
+    secondnameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    repeatpasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,18 +109,20 @@ class _SignIn2State extends State<SignIn2> {
                   children: [
                     Positioned(
                         top: 130,
-                        left: 25,
-                        child: Text(
-                          'Welcome' + '\n' + 'Back!',
-                          style: TextStyle(
-                              fontSize: 35,
-                              color: Colors.white,
-                              //fontFamily: 'HelveticaNeue',
-                              fontWeight: FontWeight.bold),
-                        )),
+                        right: 25,
+                        child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              'Get' + '\n' + 'Started!',
+                              style: TextStyle(
+                                  fontSize: 35,
+                                  color: Colors.white,
+                                  //fontFamily: 'HelveticaNeue',
+                                  fontWeight: FontWeight.bold),
+                            ))),
                     Positioned(
                         top: 80,
-                        right: -60,
+                        left: -60,
                         child: Container(
                           height: 250,
                           width: 250,
@@ -60,7 +131,7 @@ class _SignIn2State extends State<SignIn2> {
                         )),
                     Positioned(
                         top: 0,
-                        right: -30,
+                        left: -30,
                         child: Container(
                           constraints:
                               BoxConstraints(maxHeight: 370, maxWidth: 370),
@@ -83,32 +154,23 @@ class _SignIn2State extends State<SignIn2> {
                         Container(
                           alignment: Alignment.center,
                           child: Text(
-                            'Log In',
+                            'Sign Up',
                             style: TextStyle(
                                 fontSize: 30, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Container(
                           margin: EdgeInsets.fromLTRB(0, 15, 0, 5),
-                          child: Text('Email'),
+                          child: Text('Name'),
                         ),
                         TextFormField(
-                          controller: usernameController,
+                          controller: firstnameController,
                           onChanged: (text) {
                             setState(() {});
                           },
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
-                              /*focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey, width: 4),
-                                  borderRadius: BorderRadius.circular(30)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey, width: 2),
-                                  borderRadius: BorderRadius.circular(30)),*/
-                              //prefixIcon: Icon(Icons.email),
-                              suffixIcon: usernameController.text.isEmpty
+                              suffixIcon: firstnameController.text.isEmpty
                                   ? Container(
                                       width: 0,
                                     )
@@ -118,7 +180,57 @@ class _SignIn2State extends State<SignIn2> {
                                       ),
                                       onPressed: () {
                                         setState(() {
-                                          usernameController.clear();
+                                          firstnameController.clear();
+                                        });
+                                      })),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(0, 15, 0, 5),
+                          child: Text('Second Name'),
+                        ),
+                        TextFormField(
+                          controller: secondnameController,
+                          onChanged: (text) {
+                            setState(() {});
+                          },
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                              suffixIcon: secondnameController.text.isEmpty
+                                  ? Container(
+                                      width: 0,
+                                    )
+                                  : IconButton(
+                                      icon: Icon(
+                                        Icons.clear,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          secondnameController.clear();
+                                        });
+                                      })),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(0, 15, 0, 5),
+                          child: Text('Email'),
+                        ),
+                        TextFormField(
+                          controller: emailController,
+                          onChanged: (text) {
+                            setState(() {});
+                          },
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                              suffixIcon: emailController.text.isEmpty
+                                  ? Container(
+                                      width: 0,
+                                    )
+                                  : IconButton(
+                                      icon: Icon(
+                                        Icons.clear,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          emailController.clear();
                                         });
                                       })),
                         ),
@@ -133,15 +245,6 @@ class _SignIn2State extends State<SignIn2> {
                           },
                           obscureText: isPasswordHiden,
                           decoration: InputDecoration(
-                              /*focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey, width: 4),
-                                  borderRadius: BorderRadius.circular(30)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey, width: 2),
-                                  borderRadius: BorderRadius.circular(30)),*/
-                              //prefixIcon: Icon(Icons.lock),
                               suffixIcon: IconButton(
                                   icon: isPasswordHiden
                                       ? Icon(Icons.visibility_off)
@@ -153,6 +256,28 @@ class _SignIn2State extends State<SignIn2> {
                                   })),
                         ),
                         Container(
+                          margin: EdgeInsets.fromLTRB(0, 20, 0, 5),
+                          child: Text('Repeat Password'),
+                        ),
+                        TextFormField(
+                          controller: repeatpasswordController,
+                          onChanged: (text) {
+                            setState(() {});
+                          },
+                          obscureText: isRepeatPasswordHiden,
+                          decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                  icon: isRepeatPasswordHiden
+                                      ? Icon(Icons.visibility_off)
+                                      : Icon(Icons.visibility),
+                                  onPressed: () {
+                                    setState(() {
+                                      isRepeatPasswordHiden =
+                                          !isRepeatPasswordHiden;
+                                    });
+                                  })),
+                        ),
+                        Container(
                           margin: EdgeInsets.symmetric(vertical: 20),
                           alignment: Alignment.centerRight,
                           child: TextButton(
@@ -160,7 +285,7 @@ class _SignIn2State extends State<SignIn2> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SignUp2()),
+                                    builder: (context) => SignUp()),
                               );
                             },
                             child: Text('Need Help?'),
@@ -184,16 +309,16 @@ class _SignIn2State extends State<SignIn2> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SignUp2()),
+                                    builder: (context) => SignUp()),
                               );
                             },
-                            child: Text('PROCEED'),
+                            child: Text('GET STARTED'),
                           ),
                         ),
                         Container(
                           margin: EdgeInsets.symmetric(vertical: 20),
                           alignment: Alignment.center,
-                          child: Text('Or Log In Using Email'),
+                          child: Text('Or Sign Up with'),
                         ),
                         Container(
                           child: Row(
@@ -217,7 +342,7 @@ class _SignIn2State extends State<SignIn2> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SignUp2()),
+                                        builder: (context) => SignUp()),
                                   );
                                 },
                               ),
@@ -238,7 +363,7 @@ class _SignIn2State extends State<SignIn2> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SignUp2()),
+                                        builder: (context) => SignUp()),
                                   );
                                 },
                               ),
@@ -250,7 +375,7 @@ class _SignIn2State extends State<SignIn2> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'New?',
+                                'Have an Account?',
                                 style: TextStyle(fontSize: 17),
                               ),
                               TextButton(
@@ -258,11 +383,11 @@ class _SignIn2State extends State<SignIn2> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => SignUp2()),
+                                          builder: (context) => SignIn2()),
                                     );
                                   },
                                   child: Text(
-                                    'Create Account',
+                                    'Log In',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,

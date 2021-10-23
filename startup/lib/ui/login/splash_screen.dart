@@ -1,5 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:startup/ui/login/sign_in2.dart';
 import 'package:startup/ui/login/sign_in_view.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
           splash: Image.asset('assets/images/logo_letra.png'),
           splashTransition: SplashTransition.fadeTransition,
           duration: 1000,
-          nextScreen: SignInView()),
+          nextScreen: SignIn2()),
     );
   }
 }
