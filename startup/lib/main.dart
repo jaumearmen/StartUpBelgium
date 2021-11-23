@@ -4,6 +4,7 @@ import 'package:startup/ui/login/sign_in2.dart';
 import 'package:startup/ui/login/sign_in_view.dart';
 import 'package:startup/ui/login/splash_screen.dart';
 import 'package:startup/globals.dart' as globals;
+import 'package:startup/ui/profile/profile.dart';
 import 'package:startup/ui/widgets/testing.dart';
 
 Future<void> main() async {
@@ -36,14 +37,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -51,12 +44,13 @@ class _MyHomePageState extends State<MyHomePage> {
       theme: ThemeData(
         primarySwatch: Colors.yellow,
       ),
-      initialRoute: '/login2',
+      initialRoute: '/splash',
       routes: {
         '/login': (context) => SignInView(),
         '/login2': (context) => SignIn2(),
         '/splash': (context) => SplashScreen(),
-        '/testing': (context) => Testing()
+        '/testing': (context) => Testing(),
+        '/profile': (context) => Profile(),
       },
     );
   }

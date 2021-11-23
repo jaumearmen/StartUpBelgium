@@ -7,6 +7,9 @@ import 'package:startup/globals.dart' as globals;
 import 'package:startup/ui/login/sign_up.dart';
 import 'package:startup/ui/login/sign_up2.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 class SignIn2 extends StatefulWidget {
   SignIn2({Key? key}) : super(key: key);
 
@@ -27,13 +30,11 @@ class _SignIn2State extends State<SignIn2> {
         body: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-                    colors: [
-                      globals.yellow_background1,
-                      globals.yellow_background2
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    stops: [0.3, 1])),
+              colors: [globals.yellow_background1, Colors.black87],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              //stops: [0.5, 1]
+            )),
             child: Stack(
               children: [
                 Stack(
@@ -71,16 +72,18 @@ class _SignIn2State extends State<SignIn2> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    padding: EdgeInsets.fromLTRB(35, 0, 35, 35),
+                    padding: EdgeInsets.fromLTRB(35, 5, 35, 35),
                     height: 550,
-                    width: 500,
+                    width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius:
                             BorderRadius.vertical(top: Radius.circular(30.0))),
                     child: ListView(
+                      padding: EdgeInsets.zero,
                       children: [
                         Container(
+                          margin: EdgeInsets.only(top: 20),
                           alignment: Alignment.center,
                           child: Text(
                             'Log In',
@@ -89,6 +92,7 @@ class _SignIn2State extends State<SignIn2> {
                           ),
                         ),
                         Container(
+                          alignment: Alignment.centerLeft,
                           margin: EdgeInsets.fromLTRB(0, 15, 0, 5),
                           child: Text('Email'),
                         ),

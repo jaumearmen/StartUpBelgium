@@ -14,6 +14,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.yellow,
+      ),
       home: AnimatedSplashScreen(
           splash: Image.asset('assets/images/logo_letra.png'),
           splashTransition: SplashTransition.fadeTransition,

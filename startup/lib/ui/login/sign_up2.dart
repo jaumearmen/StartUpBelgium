@@ -142,7 +142,7 @@ class _SignUp2State extends State<SignUp2> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    padding: EdgeInsets.fromLTRB(35, 0, 35, 35),
+                    padding: EdgeInsets.fromLTRB(35, 5, 35, 35),
                     height: 550,
                     width: 500,
                     decoration: BoxDecoration(
@@ -285,7 +285,7 @@ class _SignUp2State extends State<SignUp2> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SignUp()),
+                                    builder: (context) => SignIn2()),
                               );
                             },
                             child: Text('Need Help?'),
@@ -309,7 +309,7 @@ class _SignUp2State extends State<SignUp2> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SignUp()),
+                                    builder: (context) => SignIn2()),
                               );
                             },
                             child: Text('GET STARTED'),
@@ -342,7 +342,7 @@ class _SignUp2State extends State<SignUp2> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SignUp()),
+                                        builder: (context) => SignIn2()),
                                   );
                                 },
                               ),
@@ -363,7 +363,7 @@ class _SignUp2State extends State<SignUp2> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SignUp()),
+                                        builder: (context) => SignIn2()),
                                   );
                                 },
                               ),
