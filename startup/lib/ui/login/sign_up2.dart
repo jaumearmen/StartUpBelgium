@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:startup/globals.dart' as globals;
+import 'package:startup/services/auth.dart';
 import 'package:startup/ui/login/sign_in2.dart';
 import 'package:startup/ui/login/sign_up.dart';
+import 'package:startup/ui/profile/profile.dart';
 
 class SignUp2 extends StatefulWidget {
   SignUp2({Key? key}) : super(key: key);
@@ -150,8 +152,10 @@ class _SignUp2State extends State<SignUp2> {
                         borderRadius:
                             BorderRadius.vertical(top: Radius.circular(30.0))),
                     child: ListView(
+                      padding: EdgeInsets.zero,
                       children: [
                         Container(
+                          margin: EdgeInsets.only(top: 20),
                           alignment: Alignment.center,
                           child: Text(
                             'Sign Up',
@@ -305,12 +309,19 @@ class _SignUp2State extends State<SignUp2> {
                                   end: Alignment.centerRight,
                                   stops: [0.3, 1])),
                           child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignIn2()),
-                              );
+                            onPressed: () async {
+                              bool shouldNavigate = await signUp(
+                                  emailController.text,
+                                  passwordController.text,
+                                  firstnameController.text,
+                                  secondnameController.text);
+                              if (shouldNavigate) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Profile()),
+                                );
+                              }
                             },
                             child: Text('GET STARTED'),
                           ),

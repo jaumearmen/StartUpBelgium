@@ -4,11 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:startup/globals.dart' as globals;
+import 'package:startup/services/auth.dart';
 import 'package:startup/ui/login/sign_up.dart';
 import 'package:startup/ui/login/sign_up2.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:startup/ui/profile/profile.dart';
 
 class SignIn2 extends StatefulWidget {
   SignIn2({Key? key}) : super(key: key);
@@ -30,15 +32,17 @@ class _SignIn2State extends State<SignIn2> {
         body: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-              colors: [globals.yellow_background1, Colors.black87],
+              colors: [globals.yellow_background1, Colors.yellow],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               //stops: [0.5, 1]
             )),
             child: Stack(
               children: [
+                /* ----TOP PICTURE PART---- */
                 Stack(
                   children: [
+                    /* WELCOME TEXT */
                     Positioned(
                         top: 130,
                         left: 25,
@@ -50,6 +54,8 @@ class _SignIn2State extends State<SignIn2> {
                               //fontFamily: 'HelveticaNeue',
                               fontWeight: FontWeight.bold),
                         )),
+
+                    /* CIRCLE SHAPE */
                     Positioned(
                         top: 80,
                         right: -60,
@@ -57,8 +63,10 @@ class _SignIn2State extends State<SignIn2> {
                           height: 250,
                           width: 250,
                           decoration: BoxDecoration(
-                              color: Colors.orange, shape: BoxShape.circle),
+                              color: Colors.yellow, shape: BoxShape.circle),
                         )),
+
+                    /* LOGO */
                     Positioned(
                         top: 0,
                         right: -30,
@@ -69,6 +77,8 @@ class _SignIn2State extends State<SignIn2> {
                         )),
                   ],
                 ),
+
+                /* ----TEXT FIELDS PART---- */
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
@@ -96,6 +106,8 @@ class _SignIn2State extends State<SignIn2> {
                           margin: EdgeInsets.fromLTRB(0, 15, 0, 5),
                           child: Text('Email'),
                         ),
+
+                        /* ----EMAIL TEXTFIELD---- */
                         TextFormField(
                           controller: usernameController,
                           onChanged: (text) {
@@ -103,15 +115,6 @@ class _SignIn2State extends State<SignIn2> {
                           },
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
-                              /*focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey, width: 4),
-                                  borderRadius: BorderRadius.circular(30)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey, width: 2),
-                                  borderRadius: BorderRadius.circular(30)),*/
-                              //prefixIcon: Icon(Icons.email),
                               suffixIcon: usernameController.text.isEmpty
                                   ? Container(
                                       width: 0,
@@ -130,6 +133,8 @@ class _SignIn2State extends State<SignIn2> {
                           margin: EdgeInsets.fromLTRB(0, 20, 0, 5),
                           child: Text('Password'),
                         ),
+
+                        /* ----PASWORD TEXTFIELD---- */
                         TextFormField(
                           controller: passwordController,
                           onChanged: (text) {
@@ -137,15 +142,6 @@ class _SignIn2State extends State<SignIn2> {
                           },
                           obscureText: isPasswordHiden,
                           decoration: InputDecoration(
-                              /*focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey, width: 4),
-                                  borderRadius: BorderRadius.circular(30)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey, width: 2),
-                                  borderRadius: BorderRadius.circular(30)),*/
-                              //prefixIcon: Icon(Icons.lock),
                               suffixIcon: IconButton(
                                   icon: isPasswordHiden
                                       ? Icon(Icons.visibility_off)
@@ -156,6 +152,8 @@ class _SignIn2State extends State<SignIn2> {
                                     });
                                   })),
                         ),
+
+                        /* ----NEED HELP BUTTON---- */
                         Container(
                           margin: EdgeInsets.symmetric(vertical: 20),
                           alignment: Alignment.centerRight,
@@ -170,6 +168,8 @@ class _SignIn2State extends State<SignIn2> {
                             child: Text('Need Help?'),
                           ),
                         ),
+
+                        /* ----PROCEED BUTTON---- */
                         Container(
                           height: 50,
                           decoration: BoxDecoration(
@@ -184,25 +184,34 @@ class _SignIn2State extends State<SignIn2> {
                                   end: Alignment.centerRight,
                                   stops: [0.3, 1])),
                           child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUp2()),
-                              );
+                            onPressed: () async {
+                              bool shouldNavigate = await signIn(
+                                  usernameController.text,
+                                  passwordController.text);
+                              if (shouldNavigate) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Profile()),
+                                );
+                              }
                             },
-                            child: Text('PROCEED'),
+                            child: Text(
+                              'PROCEED',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
+
+                        /* ----ICONS TO LOG IN---- */
                         Container(
-                          margin: EdgeInsets.symmetric(vertical: 20),
-                          alignment: Alignment.center,
-                          child: Text('Or Log In Using Email'),
-                        ),
-                        Container(
+                          margin: EdgeInsets.only(top: 40),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
+                              /* GOOGLE ICON */
                               InkWell(
                                 child: Container(
                                   constraints: BoxConstraints(
@@ -225,6 +234,8 @@ class _SignIn2State extends State<SignIn2> {
                                   );
                                 },
                               ),
+
+                              /* FACEBOOK ICON */
                               InkWell(
                                 child: Container(
                                   constraints: BoxConstraints(
@@ -249,6 +260,8 @@ class _SignIn2State extends State<SignIn2> {
                             ],
                           ),
                         ),
+
+                        /* ----SIGN UP BUTTON---- */
                         Container(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
