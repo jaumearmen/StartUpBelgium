@@ -19,7 +19,7 @@ class AuthService {
 
 Future<bool> signIn(String email, String password) async {
   try {
-    FirebaseAuth.instance
+    await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
     return true;
   } catch (e) {
@@ -43,9 +43,30 @@ Future<bool> signUp(
   }
 }
 
+Future<bool> signOut() async {
+  try {
+    await FirebaseAuth.instance.signOut();
+    return true;
+  } catch (e) {
+    print(e.toString());
+    return false;
+  }
+}
+
+Future<bool> deleteAccount() async {
+  try {
+    User? user = FirebaseAuth.instance.currentUser;
+    await user!.delete();
+    return true;
+  } catch (e) {
+    print(e.toString());
+    return false;
+  }
+}
+
 Future<bool> createUser(String email, String password) async {
   try {
-    FirebaseAuth.instance
+    await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
     return true;
   } on FirebaseAuthException catch (e) {

@@ -33,6 +33,8 @@ class _SignUp2State extends State<SignUp2> {
   bool errorsRepeatPassword = false;
   bool errorsAll = false;
 
+  /* ----ERROR HANDLING---- */
+
   String errorFirstName() {
     if (firstnameController.text.isEmpty) return "Empty Field";
     return "";
@@ -78,6 +80,49 @@ class _SignUp2State extends State<SignUp2> {
     return "";
   }
 
+  void signUpErrorHandling() async {
+    setState(() {
+      if (errorFirstName() != "")
+        errorsName = true;
+      else
+        errorsName = false;
+      if (errorSecondName() != "")
+        errorsSecondName = true;
+      else
+        errorsSecondName = false;
+      if (errorEmail() != "")
+        errorsEmail = true;
+      else
+        errorsEmail = false;
+      if (errorPass() != "")
+        errorsPassword = true;
+      else
+        errorsPassword = false;
+      if (errorRepeatPass() != "")
+        errorsRepeatPassword = true;
+      else
+        errorsRepeatPassword = false;
+      errorsAll = errorsName |
+          errorsSecondName |
+          errorsEmail |
+          errorsPassword |
+          errorsRepeatPassword;
+    });
+    if (!errorsAll) {
+      bool shouldNavigate = await signUp(
+          emailController.text,
+          passwordController.text,
+          firstnameController.text,
+          secondnameController.text);
+      if (shouldNavigate) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Profile()),
+        );
+      }
+    }
+  }
+
   bool disposed = false;
   @override
   void dispose() {
@@ -107,8 +152,10 @@ class _SignUp2State extends State<SignUp2> {
                     stops: [0.3, 1])),
             child: Stack(
               children: [
+                /* ----TOP PICTURE PART & BACKGROUND---- */
                 Stack(
                   children: [
+                    /* TITLE TEXT */
                     Positioned(
                         top: 130,
                         right: 25,
@@ -122,6 +169,8 @@ class _SignUp2State extends State<SignUp2> {
                                   //fontFamily: 'HelveticaNeue',
                                   fontWeight: FontWeight.bold),
                             ))),
+
+                    /* CIRCLE FORM */
                     Positioned(
                         top: 80,
                         left: -60,
@@ -131,6 +180,8 @@ class _SignUp2State extends State<SignUp2> {
                           decoration: BoxDecoration(
                               color: Colors.orange, shape: BoxShape.circle),
                         )),
+
+                    /* LOGO */
                     Positioned(
                         top: 0,
                         left: -30,
@@ -141,6 +192,8 @@ class _SignUp2State extends State<SignUp2> {
                         )),
                   ],
                 ),
+
+                /* ----TEXT FIELDS PART---- */
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
@@ -154,6 +207,7 @@ class _SignUp2State extends State<SignUp2> {
                     child: ListView(
                       padding: EdgeInsets.zero,
                       children: [
+                        /* ----TITLE SIGN UP---- */
                         Container(
                           margin: EdgeInsets.only(top: 20),
                           alignment: Alignment.center,
@@ -163,6 +217,8 @@ class _SignUp2State extends State<SignUp2> {
                                 fontSize: 30, fontWeight: FontWeight.bold),
                           ),
                         ),
+
+                        /* ----NAME TEXT & TEXTFIELD---- */
                         Container(
                           margin: EdgeInsets.fromLTRB(0, 15, 0, 5),
                           child: Text('Name'),
@@ -174,6 +230,7 @@ class _SignUp2State extends State<SignUp2> {
                           },
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
+                              errorText: errorsName ? errorFirstName() : null,
                               suffixIcon: firstnameController.text.isEmpty
                                   ? Container(
                                       width: 0,
@@ -188,6 +245,8 @@ class _SignUp2State extends State<SignUp2> {
                                         });
                                       })),
                         ),
+
+                        /* ----SURNAME TEXT & TEXTFIELD---- */
                         Container(
                           margin: EdgeInsets.fromLTRB(0, 15, 0, 5),
                           child: Text('Second Name'),
@@ -199,6 +258,8 @@ class _SignUp2State extends State<SignUp2> {
                           },
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
+                              errorText:
+                                  errorsSecondName ? errorSecondName() : null,
                               suffixIcon: secondnameController.text.isEmpty
                                   ? Container(
                                       width: 0,
@@ -213,6 +274,8 @@ class _SignUp2State extends State<SignUp2> {
                                         });
                                       })),
                         ),
+
+                        /* ----EMAIL TEXT & TEXTFIELD---- */
                         Container(
                           margin: EdgeInsets.fromLTRB(0, 15, 0, 5),
                           child: Text('Email'),
@@ -224,6 +287,7 @@ class _SignUp2State extends State<SignUp2> {
                           },
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
+                              errorText: errorsEmail ? errorEmail() : null,
                               suffixIcon: emailController.text.isEmpty
                                   ? Container(
                                       width: 0,
@@ -238,6 +302,8 @@ class _SignUp2State extends State<SignUp2> {
                                         });
                                       })),
                         ),
+
+                        /* ----PASSWORD TEXT & TEXTFIELD---- */
                         Container(
                           margin: EdgeInsets.fromLTRB(0, 20, 0, 5),
                           child: Text('Password'),
@@ -249,6 +315,7 @@ class _SignUp2State extends State<SignUp2> {
                           },
                           obscureText: isPasswordHiden,
                           decoration: InputDecoration(
+                              errorText: errorsPassword ? errorPass() : null,
                               suffixIcon: IconButton(
                                   icon: isPasswordHiden
                                       ? Icon(Icons.visibility_off)
@@ -259,6 +326,8 @@ class _SignUp2State extends State<SignUp2> {
                                     });
                                   })),
                         ),
+
+                        /* ----REPEAT PASSWORD TEXT & TEXTFIELD---- */
                         Container(
                           margin: EdgeInsets.fromLTRB(0, 20, 0, 5),
                           child: Text('Repeat Password'),
@@ -270,6 +339,9 @@ class _SignUp2State extends State<SignUp2> {
                           },
                           obscureText: isRepeatPasswordHiden,
                           decoration: InputDecoration(
+                              errorText: errorsRepeatPassword
+                                  ? errorRepeatPass()
+                                  : null,
                               suffixIcon: IconButton(
                                   icon: isRepeatPasswordHiden
                                       ? Icon(Icons.visibility_off)
@@ -281,6 +353,8 @@ class _SignUp2State extends State<SignUp2> {
                                     });
                                   })),
                         ),
+
+                        /* ----NEED HELP BUTTON---- */
                         Container(
                           margin: EdgeInsets.symmetric(vertical: 20),
                           alignment: Alignment.centerRight,
@@ -295,6 +369,8 @@ class _SignUp2State extends State<SignUp2> {
                             child: Text('Need Help?'),
                           ),
                         ),
+
+                        /* ----SIGN UP BUTTON---- */
                         Container(
                           height: 50,
                           decoration: BoxDecoration(
@@ -309,23 +385,14 @@ class _SignUp2State extends State<SignUp2> {
                                   end: Alignment.centerRight,
                                   stops: [0.3, 1])),
                           child: ElevatedButton(
-                            onPressed: () async {
-                              bool shouldNavigate = await signUp(
-                                  emailController.text,
-                                  passwordController.text,
-                                  firstnameController.text,
-                                  secondnameController.text);
-                              if (shouldNavigate) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Profile()),
-                                );
-                              }
+                            onPressed: () {
+                              signUpErrorHandling();
                             },
                             child: Text('GET STARTED'),
                           ),
                         ),
+
+                        /* ----ICONS SIGNUP---- */
                         Container(
                           margin: EdgeInsets.symmetric(vertical: 20),
                           alignment: Alignment.center,
@@ -335,6 +402,7 @@ class _SignUp2State extends State<SignUp2> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
+                              /* GOOGLE */
                               InkWell(
                                 child: Container(
                                   constraints: BoxConstraints(
@@ -357,6 +425,8 @@ class _SignUp2State extends State<SignUp2> {
                                   );
                                 },
                               ),
+
+                              /* FACEBOOK */
                               InkWell(
                                 child: Container(
                                   constraints: BoxConstraints(
@@ -381,6 +451,8 @@ class _SignUp2State extends State<SignUp2> {
                             ],
                           ),
                         ),
+
+                        /* ----HAVE AN ACCOUNT BUTTON TO SIGNIN---- */
                         Container(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
