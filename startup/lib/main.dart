@@ -5,7 +5,7 @@ import 'package:startup/ui/login/sign_in_view.dart';
 import 'package:startup/ui/login/splash_screen.dart';
 import 'package:startup/globals.dart' as globals;
 import 'package:startup/ui/profile/profile.dart';
-import 'package:startup/ui/widgets/testing.dart';
+import 'package:startup/ui/profile/profile2.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,8 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
         '/login': (context) => SignInView(),
         '/login2': (context) => SignIn2(),
         '/splash': (context) => SplashScreen(),
-        '/testing': (context) => Testing(),
-        '/profile': (context) => Profile(),
+        '/profile': (context) => Profile2(),
       },
     );
   }

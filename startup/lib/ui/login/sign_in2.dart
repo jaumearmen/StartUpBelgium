@@ -11,6 +11,7 @@ import 'package:startup/ui/login/sign_up2.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:startup/ui/profile/profile.dart';
+import 'package:startup/ui/profile/profile2.dart';
 
 class SignIn2 extends StatefulWidget {
   SignIn2({Key? key}) : super(key: key);
@@ -44,8 +45,8 @@ class _SignIn2State extends State<SignIn2> {
                   children: [
                     /* WELCOME TEXT */
                     Positioned(
-                        top: 130,
-                        left: 25,
+                        top: MediaQuery.of(context).size.height * 0.13,
+                        left: MediaQuery.of(context).size.width * 0.08,
                         child: Text(
                           'Welcome' + '\n' + 'Back!',
                           style: TextStyle(
@@ -57,22 +58,25 @@ class _SignIn2State extends State<SignIn2> {
 
                     /* CIRCLE SHAPE */
                     Positioned(
-                        top: 80,
-                        right: -60,
+                        top: MediaQuery.of(context).size.height * (-0.11),
+                        right: MediaQuery.of(context).size.width * (-0.17),
                         child: Container(
-                          height: 250,
-                          width: 250,
+                          height: MediaQuery.of(context).size.height * 0.65,
+                          width: MediaQuery.of(context).size.width * 0.65,
                           decoration: BoxDecoration(
                               color: Colors.yellow, shape: BoxShape.circle),
                         )),
 
                     /* LOGO */
                     Positioned(
-                        top: 0,
-                        right: -30,
+                        top: MediaQuery.of(context).size.height * -0.05,
+                        right: MediaQuery.of(context).size.width * (-0.12),
                         child: Container(
-                          constraints:
-                              BoxConstraints(maxHeight: 370, maxWidth: 370),
+                          constraints: BoxConstraints(
+                              maxHeight:
+                                  (MediaQuery.of(context).size.height * 0.65),
+                              maxWidth:
+                                  (MediaQuery.of(context).size.width * 0.65)),
                           child: Image.asset('assets/images/logo_app.png'),
                         )),
                   ],
@@ -82,8 +86,8 @@ class _SignIn2State extends State<SignIn2> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    padding: EdgeInsets.fromLTRB(35, 5, 35, 35),
-                    height: 550,
+                    padding: EdgeInsets.fromLTRB(35, 5, 35, 5),
+                    height: MediaQuery.of(context).size.height * 0.73,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -103,7 +107,7 @@ class _SignIn2State extends State<SignIn2> {
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-                          margin: EdgeInsets.fromLTRB(0, 15, 0, 5),
+                          margin: EdgeInsets.only(top: 15),
                           child: Text('Email'),
                         ),
 
@@ -130,7 +134,7 @@ class _SignIn2State extends State<SignIn2> {
                                       })),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 20, 0, 5),
+                          margin: EdgeInsets.only(top: 15),
                           child: Text('Password'),
                         ),
 
@@ -155,23 +159,18 @@ class _SignIn2State extends State<SignIn2> {
 
                         /* ----NEED HELP BUTTON---- */
                         Container(
-                          margin: EdgeInsets.symmetric(vertical: 20),
+                          margin: EdgeInsets.fromLTRB(0, 5, 0, 15),
                           alignment: Alignment.centerRight,
                           child: TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUp2()),
-                              );
-                            },
-                            child: Text('Need Help?'),
+                            onPressed: () {},
+                            child: Text('Need Help?',
+                                style: TextStyle(color: Colors.black)),
                           ),
                         ),
 
                         /* ----PROCEED BUTTON---- */
                         Container(
-                          height: 50,
+                          height: MediaQuery.of(context).size.height * 0.07,
                           decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(40)),
@@ -192,7 +191,7 @@ class _SignIn2State extends State<SignIn2> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Profile()),
+                                      builder: (context) => Profile2()),
                                 );
                               }
                             },
@@ -226,13 +225,7 @@ class _SignIn2State extends State<SignIn2> {
                                   child:
                                       Image.asset('assets/images/google2.png'),
                                 ),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SignUp2()),
-                                  );
-                                },
+                                onTap: () {},
                               ),
 
                               /* FACEBOOK ICON */
@@ -249,13 +242,7 @@ class _SignIn2State extends State<SignIn2> {
                                   ),
                                   child: Image.asset('assets/images/face1.png'),
                                 ),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SignUp2()),
-                                  );
-                                },
+                                onTap: () {},
                               ),
                             ],
                           ),

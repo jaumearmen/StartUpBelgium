@@ -157,8 +157,8 @@ class _SignUp2State extends State<SignUp2> {
                   children: [
                     /* TITLE TEXT */
                     Positioned(
-                        top: 130,
-                        right: 25,
+                        top: MediaQuery.of(context).size.height * 0.13,
+                        right: MediaQuery.of(context).size.width * 0.08,
                         child: Align(
                             alignment: Alignment.centerRight,
                             child: Text(
@@ -172,22 +172,25 @@ class _SignUp2State extends State<SignUp2> {
 
                     /* CIRCLE FORM */
                     Positioned(
-                        top: 80,
-                        left: -60,
+                        top: MediaQuery.of(context).size.height * (-0.11),
+                        left: MediaQuery.of(context).size.width * (-0.17),
                         child: Container(
-                          height: 250,
-                          width: 250,
+                          height: MediaQuery.of(context).size.height * 0.65,
+                          width: MediaQuery.of(context).size.width * 0.65,
                           decoration: BoxDecoration(
-                              color: Colors.orange, shape: BoxShape.circle),
+                              color: Colors.yellow, shape: BoxShape.circle),
                         )),
 
                     /* LOGO */
                     Positioned(
-                        top: 0,
-                        left: -30,
+                        top: MediaQuery.of(context).size.height * -0.05,
+                        left: MediaQuery.of(context).size.width * (-0.17),
                         child: Container(
-                          constraints:
-                              BoxConstraints(maxHeight: 370, maxWidth: 370),
+                          constraints: BoxConstraints(
+                              maxHeight:
+                                  (MediaQuery.of(context).size.height * 0.65),
+                              maxWidth:
+                                  (MediaQuery.of(context).size.width * 0.65)),
                           child: Image.asset('assets/images/logo_app.png'),
                         )),
                   ],
@@ -197,9 +200,9 @@ class _SignUp2State extends State<SignUp2> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    padding: EdgeInsets.fromLTRB(35, 5, 35, 35),
-                    height: 550,
-                    width: 500,
+                    padding: EdgeInsets.fromLTRB(35, 5, 35, 5),
+                    height: MediaQuery.of(context).size.height * 0.73,
+                    width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius:
@@ -220,7 +223,7 @@ class _SignUp2State extends State<SignUp2> {
 
                         /* ----NAME TEXT & TEXTFIELD---- */
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 15, 0, 5),
+                          margin: EdgeInsets.only(top: 10),
                           child: Text('Name'),
                         ),
                         TextFormField(
@@ -248,7 +251,7 @@ class _SignUp2State extends State<SignUp2> {
 
                         /* ----SURNAME TEXT & TEXTFIELD---- */
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 15, 0, 5),
+                          margin: EdgeInsets.only(top: 15),
                           child: Text('Second Name'),
                         ),
                         TextFormField(
@@ -277,7 +280,7 @@ class _SignUp2State extends State<SignUp2> {
 
                         /* ----EMAIL TEXT & TEXTFIELD---- */
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 15, 0, 5),
+                          margin: EdgeInsets.only(top: 15),
                           child: Text('Email'),
                         ),
                         TextFormField(
@@ -305,7 +308,7 @@ class _SignUp2State extends State<SignUp2> {
 
                         /* ----PASSWORD TEXT & TEXTFIELD---- */
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 20, 0, 5),
+                          margin: EdgeInsets.only(top: 15),
                           child: Text('Password'),
                         ),
                         TextFormField(
@@ -329,7 +332,7 @@ class _SignUp2State extends State<SignUp2> {
 
                         /* ----REPEAT PASSWORD TEXT & TEXTFIELD---- */
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 20, 0, 5),
+                          margin: EdgeInsets.only(top: 15),
                           child: Text('Repeat Password'),
                         ),
                         TextFormField(
@@ -356,7 +359,7 @@ class _SignUp2State extends State<SignUp2> {
 
                         /* ----NEED HELP BUTTON---- */
                         Container(
-                          margin: EdgeInsets.symmetric(vertical: 20),
+                          margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
                           alignment: Alignment.centerRight,
                           child: TextButton(
                             onPressed: () {
